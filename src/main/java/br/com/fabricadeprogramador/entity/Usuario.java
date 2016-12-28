@@ -7,6 +7,7 @@ public class Usuario {
 	private String senha;
 	
 	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -32,6 +33,9 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
+	}	
 	
 }

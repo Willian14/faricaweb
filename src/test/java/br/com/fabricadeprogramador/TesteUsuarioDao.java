@@ -1,5 +1,7 @@
 package br.com.fabricadeprogramador;
 
+import java.util.ArrayList;
+
 import br.com.fabricadeprogramador.Dao.UsuarioDao;
 import br.com.fabricadeprogramador.entity.Usuario;
 
@@ -9,32 +11,34 @@ public class TesteUsuarioDao {
 		//testeCadastrar();
 		//testeAlterar();
 		//testeExcluir();
-		testeSalvar();
+		//testeSalvar();
+		//testeBuscaPorId();
+		testeBuscarTodos();
 	}
 	public static void testeCadastrar(){
 		Usuario usu = new Usuario();
 				
-				usu.setNome("Jãozão");
-				usu.setLogin("jjjj");
-				usu.setSenha("210100");
+		usu.setNome("Jãozão");
+		usu.setLogin("jjjj");
+		usu.setSenha("210100");
 				
-				UsuarioDao usuDao = new UsuarioDao();
-				usuDao.cadastrar(usu);
+		UsuarioDao usuDao = new UsuarioDao();
+		usuDao.cadastrar(usu);
 				
-				System.out.println("Cadastrado com sucesso!!!!");
+		System.out.println("Cadastrado com sucesso!!!!");
 	}
 	
 	public static void testeAlterar(){
 		Usuario usu = new Usuario();
-				usu.setId(4);
-				usu.setNome("Jãozão da silva");
-				usu.setLogin("jjjjssss");
-				usu.setSenha("2101004");
+		usu.setId(4);
+		usu.setNome("Jãozão da silva");
+		usu.setLogin("jjjjssss");
+		usu.setSenha("2101004");
 				
-				UsuarioDao usuDao = new UsuarioDao();
-				usuDao.alterar(usu);
+		UsuarioDao usuDao = new UsuarioDao();
+		usuDao.alterar(usu);
 				
-				System.out.println("Alterado com sucesso!!!!");
+		System.out.println("Alterado com sucesso!!!!");
 	}
 	
 	public static void testeExcluir(){
@@ -57,5 +61,23 @@ public class TesteUsuarioDao {
 		usuDao.salvar(usu);
 		System.out.println("Salvo com sucesso!!!!");		
 				
+	}
+	
+	public static void testeBuscaPorId(){
+		UsuarioDao usuDao = new UsuarioDao();
+		Usuario usu = usuDao.buscaPorId(5);
+		
+		System.out.println(usu);
+	}
+	
+	public static void testeBuscarTodos(){
+		ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+		
+		UsuarioDao usuDao = new UsuarioDao();
+		listaUsuario = usuDao.buscarTodos();
+		
+		for(Usuario u: listaUsuario){
+			System.out.println(u);
+		}
 	}
 }

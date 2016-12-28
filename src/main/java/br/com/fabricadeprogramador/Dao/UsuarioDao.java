@@ -2,7 +2,9 @@ package br.com.fabricadeprogramador.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.com.fabricadeprogramador.entity.Usuario;
 import br.com.fabricadeprogramador.persistencia.jdbc.ConexaoFactory;
@@ -62,5 +64,51 @@ public class UsuarioDao {
 		}
 	}
 	
+	public Usuario buscaPorId(Integer id){
+		String sql = "select * from usuario where id = ?";
+		try(PreparedStatement preparador = con.prepareStatement(sql)){
+			preparador.setInt(1, id);
+			
+			ResultSet rs = preparador.executeQuery();
+			if (rs.next()){
+				Usuario usu = new Usuario();
+				usu.setId(rs.getInt("id"));
+				usu.setNome(rs.getString("nome"));
+				usu.setLogin(rs.getString("login"));
+				usu.setSenha(rs.getString("senha"));
+				
+				return usu;
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Usuario> buscarTodos(){
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
+		String sql = "select * from usuario";
+		try (PreparedStatement preparador  = con.prepareStatement(sql)){
+			ResultSet rs = preparador.executeQuery();
+			
+			while(rs.next()){
+				Usuario usu = new Usuario();
+				usu.setId(rs.getInt("id"));
+				usu.setNome(rs.getString("nome"));
+				usu.setLogin(rs.getString("login"));
+				usu.setSenha(rs.getString("senha"));
+				
+				lista.add(usu);
+				
+			}
+			return lista;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
