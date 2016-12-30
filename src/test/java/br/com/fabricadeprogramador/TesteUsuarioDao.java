@@ -13,7 +13,8 @@ public class TesteUsuarioDao {
 		//testeExcluir();
 		//testeSalvar();
 		//testeBuscaPorId();
-		testeBuscarTodos();
+		//testeBuscarTodos();
+		testeAutenticar();
 	}
 	public static void testeCadastrar(){
 		Usuario usu = new Usuario();
@@ -79,5 +80,15 @@ public class TesteUsuarioDao {
 		for(Usuario u: listaUsuario){
 			System.out.println(u);
 		}
+	}
+	
+	public static void testeAutenticar(){
+		Usuario usu = new Usuario();
+		usu.setLogin("mar");
+		usu.setSenha("1234");
+		UsuarioDao usuDao = new UsuarioDao();
+		Usuario usuConsulta = usuDao.autenticar(usu);
+		
+		System.out.println(usuConsulta);
 	}
 }
